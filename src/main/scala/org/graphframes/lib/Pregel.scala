@@ -226,7 +226,7 @@ class Pregel(val graph: GraphFrame) {
         // TODO: remove last checkpoint file.
       }
       newVertexUpdateColDF.cache()
-      newVertexUpdateColDF.foreachPartition(_ => {}) // materialize it
+      newVertexUpdateColDF.foreachPartition{_ : Iterator[_]=>} // materialize it
 
       if (vertexUpdateColDF != null) {
         vertexUpdateColDF.unpersist()
